@@ -206,14 +206,84 @@ public class Taaller1 {
 						}
 
 						fw.close();
-
 						System.out.println("Contraseña cambiada con exito!");
 			        }
 					
 			    //Salir del submenu 
 			    }while (opcione != 5);
+			} else {
+				// Mensaje si las credenciales son incorrectas
+				System.out.println("Usuario o Contraseña incorecta.");
 			}
-			}
+		}
+		if (opcion == 2) {
+
+			int opcione2;
+			// Submenu de analisis
+			do {
+				System.out.println("Bienvenido al menu de analisis!\r\n" + "\r\n" + "Que deseas realizar?\r\n" + "\r\n" + "1) Actividad más realizada\r\n" + "2) Actividad más realizada por cada usuario\r\n" + "3) Usuario con mayor procastinacion\r\n" + "4) Ver todas las actividades\r\n" + "5) Salir");
+				opcione2 = Integer.valueOf(leido.nextLine());
+				// Calcular actividad más repetida
+				if (opcione2 == 1) {
+					Scanner leer = new Scanner(new File("Registros.txt"));
+
+					String[] actividades = new String[300];
+					int total = 0;
+					// Lectura de actividades 
+					while (leer.hasNextLine()) {
+						String linea = leer.nextLine();
+						String[] partes = linea.split(";");
+
+						actividades[total] = partes[3];
+						total++;
+					}
+					leer.close();
+
+					int max = 0;
+					String repetida = "";
+					// Conteo de frecuencia de actividades
+					for (int i = 0; i < total; i++) {
+
+						int contador = 0;
+
+						for (int j = 0; j < total; j++) {
+							if (actividades[i].equalsIgnoreCase(actividades[j])) {
+								contador++;
+							}
+						}
+
+						if (contador > max) {
+							max = contador;
+							repetida = actividades[i];
+						}
+					}
+					System.out.println("Actividad más realizada:");
+					//Mostrar resultado 
+					System.out.println(repetida + " -> " + max + " veces");
+
+				}
+				if (opcione2 == 2) {
+					System.out.println("Hacer despues");
+				}
+				if (opcione2 == 3) {
+					System.out.println("Hacer despues xd");
+				}
+				// Mostrar todas las actividades
+				if (opcione2 == 4) {
+
+					File archivo = new File("Registros.txt");
+					Scanner leer = new Scanner(archivo);
+					// Lectura e impresion 
+					while (leer.hasNextLine()) {
+						String linea = leer.nextLine();
+						String[] partes = linea.split(";");
+
+						System.out.println(partes[0] + " | " + partes[1] + " | " + partes[2] + " horas | " + partes[3]);
+					}
+					leer.close();
+				}
+			} while (opcione2 != 5);
+		}    
 		//Salir del menu y cerrar el programa
 		}while (opcion != 3);
 	}
