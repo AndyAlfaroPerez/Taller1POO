@@ -57,13 +57,35 @@ public class Taaller1 {
 			            System.out.println("\r\nAcceso correcto!\r\n");
 			            System.out.println("Bienvenido " + usuario + "!");
 
-			            int opcione;
+			    int opcione = 0;
 			
 			 // SubMenu del usuario
 			    do {
-			    	System.out.println("Que deseas realizar?\r\n" + "\r\n" + "1) Registrar actividad.\r\n" + "2) Modificar actividad.\r\n" + "3) Eliminar actividad.\r\n" + "4) Cambiar contraseña.\r\n" + "5) Salir.");
 			        
-			        opcione = Integer.valueOf(leido.nextLine());
+			    	boolean vaciont = false;
+
+			        while (!vaciont) {
+			        	System.out.println("Que deseas realizar?\r\n" + "\r\n" + "1) Registrar actividad.\r\n" + "2) Modificar actividad.\r\n" + "3) Eliminar actividad.\r\n" + "4) Cambiar contraseña.\r\n" + "5) Salir.");
+			            try {
+			                String input = leido.nextLine();
+
+			                if (input.equals("")) {
+			                    System.out.println("Error: no puede estar vacio.");
+			                    continue;
+			                }
+
+			                opcione = Integer.valueOf(input);
+
+			                if (opcione >= 1 && opcione <= 5) {
+			                    vaciont = true;
+			                } else {
+			                    System.out.println("Error: opcion fuera de rango.");
+			                }
+
+			            } catch (Exception e) {
+			                System.out.println("Error: debe ingresar un numero.");
+			            }
+			        }
 			        
 			     // Registro de nueva actividad
 			        if (opcione == 1) {
@@ -434,7 +456,7 @@ public class Taaller1 {
 						}
 
 						fw.close();
-						System.out.println("Contraseña cambiada con exito!");
+						System.out.println("Contraseña cambiada con exito!" + "\r\n");
 			        }
 					
 			    //Salir del submenu de usuario 
@@ -449,11 +471,34 @@ public class Taaller1 {
 		
 			if (opcion == 2) {
 
-			int opcione2;
+			int opcione2 = 0;
 			// Submenu de analisis
 			do {
-				System.out.println("Bienvenido al menu de analisis!\r\n" + "\r\n" + "Que deseas realizar?\r\n" + "\r\n" + "1) Actividad más realizada\r\n" + "2) Actividad más realizada por cada usuario\r\n" + "3) Usuario con mayor procastinacion\r\n" + "4) Ver todas las actividades\r\n" + "5) Salir");
-				opcione2 = Integer.valueOf(leido.nextLine());
+				
+				boolean opcionValida = false;
+
+			    while (!opcionValida) {
+			    	System.out.println("Bienvenido al menu de analisis!\r\n" + "\r\n" + "Que deseas realizar?\r\n" + "\r\n" + "1) Actividad más realizada\r\n" + "2) Actividad más realizada por cada usuario\r\n" + "3) Usuario con mayor procastinacion\r\n" + "4) Ver todas las actividades\r\n" + "5) Salir");
+			        try {
+			            String input = leido.nextLine();
+
+			            if (input.equals("")) {
+			                System.out.println("Error: no puede estar vacio.");
+			                continue;
+			            }
+
+			            opcione2 = Integer.valueOf(input);
+
+			            if (opcione2 >= 1 && opcione2 <= 5) {
+			                opcionValida = true;
+			            } else {
+			                System.out.println("Error: opcion fuera de rango.");
+			            }
+
+			        } catch (Exception e) {
+			            System.out.println("Error: debe ingresar un numero.");
+			        }
+			    }
 				// Calcular actividad más repetida
 				if (opcione2 == 1) {
 					Scanner leer = new Scanner(new File("Registros.txt"));
